@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSE</title>
+    <style>
+    	body {
+
+    		color: green;
+    		}
+    	a {
+    	color: green;
+    	}
+        label {
+            display: none;
+        }
+        h1 {
+            font-family: Courier, monospace;
+        }
+        input {
+            font-size: 1.5vw;
+            width: 50%;
+            padding: 12px 18px;
+            outline: none;
+            border-width: 0 0 2px 0;
+            background: #eee3;
+            border-color: teal;
+            border-style: solid;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.129);
+            color: green;
+        }
+        input:focus {
+            border-width: 0 0 4px 0;
+        }
+        div.results {
+            margin-top: 12px;
+        }
+        div.search_results {
+            margin: 15px auto;
+            text-align: center;
+            width: 90%;
+            padding: 12px;
+        }
+        input.res {
+            width: 100%;
+            font-size: 15px;
+            border: none;
+            outline: none;
+            background: rgba(193, 245, 245, 0.418);
+            border-left: 2px solid rgb(0, 225, 255);
+        }
+        .headers {
+            font-size: 21px;
+            font-weight: bolder;
+            text-decoration: none;
+            color: green;
+            width: 160%;
+            padding: 24px 222px;
+        }
+        .headers:hover {
+            color: rgb(0, 128, 111);
+            background: rgba(128, 128, 128, 0.274);
+        }
+    </style>
+</head>
+<body>
+    <div class="search_bar">
+        <form method="post" action="">
+            {% csrf_token %}
+            <h1><span style="color: rgb(210, 245, 81);">L</span><span style="color: rgb(255, 154, 22);">S</span><span style="color: rgb(81, 245, 196);">E</span> {{ form }}</h1>
+        </form>
+    </div>
+
+    <div class="results">
+        searched for: <span style="background: teal; color: white; padding: 0 5px;">{{ search }}</span>
+        {% for result in results %}
+            <div class="search_results">
+                <div>
+                    <a class="headers" href="http://127.0.0.1:8042/{{ result.url }}" target="_blank">{{ result.header|slice:":42" }}...</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
